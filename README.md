@@ -16,6 +16,3 @@ Upload project to GitHub.
 Then connect GitHub repository with:
 
 - AWS Lightsail
-- Netlify
-- Vercel
-- GitHub Pages
