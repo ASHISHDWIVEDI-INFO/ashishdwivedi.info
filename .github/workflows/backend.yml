@@ -1,0 +1,86 @@
+name: 🚀 Deploy Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend.yml'
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # ─────────────────────────────────────────────
+  # JOB 1: Lint + test on GitHub runner
+  # ─────────────────────────────────────────────
+  validate:
+    name: ✅ Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: backend/package.json
+
+      - name: Install dependencies
+        run: cd backend && npm ci
+
+      - name: Run ESLint
+        run: cd backend && npm run lint --if-present
+
+  # ─────────────────────────────────────────────
+  # JOB 2: Deploy to Lightsail via SSH
+  # ─────────────────────────────────────────────
+  deploy:
+    name: 🚢 Deploy to Lightsail
+    runs-on: ubuntu-latest
+    needs: validate
+    environment: production
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host:     ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USER }}
+          key:      ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          port:     ${{ secrets.LIGHTSAIL_PORT || 22 }}
+          timeout:  120s
+          script: |
+            set -e
+
+            echo "📦 Pulling latest code..."
+            cd /var/www/portfolio
+            git pull origin main
+
+            echo "📥 Installing backend dependencies..."
+            cd /var/www/portfolio/backend
+            npm ci --omit=dev
+
+            echo "♻️  Restarting backend with PM2..."
+            pm2 restart portfolio-backend --update-env || \
+            pm2 start ecosystem.config.js --only portfolio-backend
+
+            echo "💾 Saving PM2 process list..."
+            pm2 save
+
+            echo "🏥 Health check..."
+            sleep 3
+            curl -sf http://localhost:5000/health | grep -q '"success":true' && \
+              echo "✅ Backend is healthy" || \
+              (echo "❌ Health check failed!" && pm2 logs portfolio-backend --lines 20 && exit 1)
+
+      - name: Notify success
+        if: success()
+        run: echo "✅ Backend deployed successfully to Lightsail!"
+
+      - name: Notify failure
+        if: failure()
+        run: echo "❌ Backend deployment failed. Check logs above."
