@@ -141,3 +141,4 @@ exports.bulkCreate = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error bulk creating skills.' });
   }
 };
+
