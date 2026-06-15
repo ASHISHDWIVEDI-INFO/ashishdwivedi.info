@@ -1,9 +1,11 @@
 import Navbar             from '@/components/ui/Navbar';
 import HeroSection        from '@/components/sections/HeroSection';
 import AboutSection       from '@/components/sections/AboutSection';
+import StartupSection     from '@/components/sections/StartupSection';
 import SkillsSection      from '@/components/sections/SkillsSection';
 import ExperienceSection  from '@/components/sections/ExperienceSection';
 import ProjectsSection    from '@/components/sections/ProjectsSection';
+import BlogSection        from '@/components/sections/BlogSection';
 import ContactSection     from '@/components/sections/ContactSection';
 
 // ── Placeholder for sections built in future modules ──
@@ -55,7 +57,8 @@ export default async function HomePage() {
       {/* ── Section 2: About ── */}
       <AboutSection profile={profile} />
 
-      <ComingSoon id="startup"      label="Startup"        />
+      {/* ── Section 3: Startup ── */}
+      <StartupSection />
 
       {/* ── Section 4: Skills ── */}
       <SkillsSection />
@@ -66,9 +69,10 @@ export default async function HomePage() {
       <ProjectsSection />
 
       <ComingSoon id="achievements" label="Achievements"   />
-      <ComingSoon id="blog"         label="Blog"           />
+      {/* ── Section 7: Blog ── */}
+      <BlogSection />
 
-      {/* ── Section 9: Contact ── */}
+      {/* ── Section 8: Contact ── */}
       <ContactSection profile={profile} />
 
       {/* Minimal footer placeholder */}
