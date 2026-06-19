@@ -233,5 +233,5 @@ module.exports = {
       watch: false,
     },
 
-  ],
+  git ],
 };
