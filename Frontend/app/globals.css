@@ -268,7 +268,7 @@ body {
 
   /* Input */
   .input-field {
-    @apply w-full px-4 py-3 bg-bg-secondary border border-border-color
+    apply w-full px-4 py-3 bg-bg-secondary border border-border-color
            rounded-xl text-text-primary placeholder-text-muted
            focus:outline-none focus:ring-2 focus:ring-primary-500
            focus:border-transparent transition-all duration-200;
