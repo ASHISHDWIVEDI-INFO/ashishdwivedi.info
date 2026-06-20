@@ -32,7 +32,6 @@ function TimelineLine() {
     <div ref={ref} className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0
                                w-px bg-purple-500/10 hidden lg:block">
       <motion.div
-        style={{ height }}
         className="w-full origin-top"
         style={{
           height,
