@@ -3,6 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-disable at-rule-no-unknown */
 
 /* ================================================
    CSS CUSTOM PROPERTIES — Design Tokens
@@ -226,52 +227,145 @@ body {
 @layer components {
   /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-primary-500 text-white
-           font-semibold rounded-xl hover:bg-primary-600 active:scale-95
-           transition-all duration-200 shadow-lg hover:shadow-glow-purple;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-purple);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-primary:hover {
+    background-color: #6d28d9;
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.4),
+                0 0 60px rgba(124, 58, 237, 0.2);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.95);
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-6 py-3 border border-primary-500
-           text-primary-500 font-semibold rounded-xl hover:bg-primary-500
-           hover:text-white active:scale-95 transition-all duration-200;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--accent-purple);
+    color: var(--accent-purple);
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--accent-purple);
+    color: white;
+  }
+
+  .btn-outline:active {
+    transform: scale(0.95);
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 px-4 py-2 text-text-secondary
-           rounded-lg hover:bg-bg-secondary active:scale-95
-           transition-all duration-200;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--bg-secondary);
+  }
+
+  .btn-ghost:active {
+    transform: scale(0.95);
   }
 
   /* Section Title */
   .section-title {
-    @apply text-4xl md:text-5xl font-bold font-heading text-gradient mb-4;
+    font-size: 2.25rem;
+    line-height: 1.1;
+    font-weight: 700;
+    font-family: var(--font-plus-jakarta);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #7C3AED 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 3rem;
+    }
   }
 
   .section-subtitle {
-    @apply text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* Cards */
   .card {
-    @apply bg-card rounded-2xl border border-border-color
-           hover:border-border-hover transition-all duration-300
-           hover:shadow-card-dark;
+    background-color: var(--bg-card);
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   }
 
   /* Badge */
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-           bg-primary-100 text-primary-700 dark:bg-primary-900/30
-           dark:text-primary-400;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: rgba(124, 58, 237, 0.1);
+    color: #7C3AED;
+  }
+
+  .dark .badge {
+    background-color: rgba(124, 58, 237, 0.15);
+    color: var(--text-primary);
   }
 
   /* Input */
   .input-field {
-    apply w-full px-4 py-3 bg-bg-secondary border border-border-color
-           rounded-xl text-text-primary placeholder-text-muted
-           focus:outline-none focus:ring-2 focus:ring-primary-500
-           focus:border-transparent transition-all duration-200;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+  }
+
+  .input-field::placeholder {
+    color: var(--text-muted);
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3);
   }
 }
 
