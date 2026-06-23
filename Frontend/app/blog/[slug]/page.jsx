@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Calendar, Clock, ArrowLeft, Tag } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, Tag, BookOpen } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 // ── Fetch single post ─────────────────────────
