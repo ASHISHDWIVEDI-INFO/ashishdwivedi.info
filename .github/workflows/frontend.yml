@@ -171,7 +171,7 @@ jobs:
       - name: Build
         working-directory: Frontend
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.https://ashishdwivedi.info/api }}
           NODE_ENV: production
         run: npm run build
 
@@ -240,7 +240,6 @@ jobs:
             pm2 reload ecosystem.config.js --only portfolio-frontend --env production
             echo "Frontend release $RELEASE_TAG is live."
           EOF
-
   # ── 3. Smoke test ─────────────────────────────────────────────────────────────
   smoke:
     name: Smoke test
@@ -253,13 +252,13 @@ jobs:
 
       - name: Check homepage
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.SITE_BASE_URL }}")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.https://ashishdwivedi.info }}")
           echo "Homepage status: $STATUS"
           [ "$STATUS" = "200" ] || { echo "FAIL: homepage returned $STATUS"; exit 1; }
 
       - name: Check sitemap (SSG health)
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.SITE_BASE_URL }}/sitemap.xml")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.https://ashishdwivedi.info }}/sitemap.xml")
           echo "Sitemap status: $STATUS"
           [ "$STATUS" = "200" ] || { echo "FAIL: sitemap returned $STATUS"; exit 1; }
 
