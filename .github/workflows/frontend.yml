@@ -172,7 +172,6 @@ jobs:
         working-directory: Frontend
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          SITE_BASE_URL: ${{ secrets.https://ashishdwivedi.info }}
           NODE_ENV: production
         run: npm run build
 
@@ -254,13 +253,13 @@ jobs:
 
       - name: Check homepage
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.https://ashishdwivedi.info }}")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.SITE_BASE_URL }}")
           echo "Homepage status: $STATUS"
           [ "$STATUS" = "200" ] || { echo "FAIL: homepage returned $STATUS"; exit 1; }
 
       - name: Check sitemap (SSG health)
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.https://ashishdwivedi.info }}/sitemap.xml")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.SITE_BASE_URL }}/sitemap.xml")
           echo "Sitemap status: $STATUS"
           [ "$STATUS" = "200" ] || { echo "FAIL: sitemap returned $STATUS"; exit 1; }
 
