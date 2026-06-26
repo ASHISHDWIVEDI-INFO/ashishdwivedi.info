@@ -171,8 +171,7 @@ jobs:
       - name: Build
         working-directory: Frontend
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.https://ashishdwivedi.info/admin}}
-          NEXT_PUBLIC_SITE_URL: ${{ secrets.https://ashishdwivedi.info }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NODE_ENV: production
         run: npm run build
 
@@ -212,7 +211,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.SHA256:zlACJKn3gA7NCVF/3LsJZOEwEf3kuT7hbZ+MXE6diVs }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Add host to known_hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
@@ -254,13 +253,13 @@ jobs:
 
       - name: Check homepage
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.https://ashishdwivedi.info }}")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.SITE_BASE_URL }}")
           echo "Homepage status: $STATUS"
           [ "$STATUS" = "200" ] || { echo "FAIL: homepage returned $STATUS"; exit 1; }
 
       - name: Check sitemap (SSG health)
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.https://ashishdwivedi.info }}/sitemap.xml")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.SITE_BASE_URL }}/sitemap.xml")
           echo "Sitemap status: $STATUS"
           [ "$STATUS" = "200" ] || { echo "FAIL: sitemap returned $STATUS"; exit 1; }
 
@@ -275,7 +274,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.SHA256:zlACJKn3gA7NCVF/3LsJZOEwEf3kuT7hbZ+MXE6diVs }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Add host to known_hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
