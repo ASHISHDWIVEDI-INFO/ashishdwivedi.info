@@ -181,8 +181,13 @@ jobs:
         with:
           name: nextjs-build-${{ github.sha }}
           path: |
-            Frontend/.next
-            Frontend/public
+            # Frontend/.next
+            # Frontend/public
+            Frontend/.next/**
+            Frontend/public/**
+            Frontend/package.json
+            Frontend/package-lock.json
+            Frontend/next.config.js
           retention-days: 1
 
   # ── 2. Deploy ─────────────────────────────────────────────────────────────────
