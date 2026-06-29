@@ -380,18 +380,27 @@ jobs:
         with:
           node-version: "22"   # Node 20 deprecated on GH runners — use 22 LTS
 
+      # - name: Install dependencies
+      #   working-directory: Backend
+      #   # Use npm ci if a lockfile exists, otherwise fall back to npm install.
+      #   # This prevents the "specified paths were not resolved" cache error when
+      #   # package-lock.json hasn't been committed yet.
+      #   run: |
+      #     if [ -f package-lock.json ]; then
+      #       npm ci
+      #     else
+      #       echo "No package-lock.json found — running npm install and committing lockfile."
+      #       npm install
+      #     fi
+
       - name: Install dependencies
-        working-directory: Backend
-        # Use npm ci if a lockfile exists, otherwise fall back to npm install.
-        # This prevents the "specified paths were not resolved" cache error when
-        # package-lock.json hasn't been committed yet.
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            echo "No package-lock.json found — running npm install and committing lockfile."
-            npm install
-          fi
+  working-directory: Backend
+  run: |
+    if [ -f package-lock.json ]; then
+      npm ci --legacy-peer-deps
+    else
+      npm install --legacy-peer-deps
+    fi
 
       - name: Run tests
         working-directory: Backend
