@@ -394,13 +394,13 @@ jobs:
       #     fi
 
       - name: Install dependencies
-  working-directory: Backend
-  run: |
-    if [ -f package-lock.json ]; then
-      npm ci --legacy-peer-deps
-    else
-      npm install --legacy-peer-deps
-    fi
+        working-directory: Backend
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --legacy-peer-deps
+          else
+            npm install --legacy-peer-deps
+          fi
 
       - name: Run tests
         working-directory: Backend
