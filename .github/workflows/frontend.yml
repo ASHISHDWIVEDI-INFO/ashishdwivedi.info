@@ -243,10 +243,10 @@ jobs:
             cd $RELEASE_DIR
             npm ci --omit=dev
             ln -sfn $RELEASE_DIR /var/www/portfolio/frontend-current
-            # pm2 reload ecosystem.config.js --only portfolio-frontend --env production
-            pm2 reload /home/ubuntu/ashishdwivedi.info/ecosystem.config.js \
-            --only portfolio-frontend \
-            --update-env
+            pm2 reload ecosystem.config.js --only portfolio-frontend --env production
+            # pm2 reload /home/ubuntu/ashishdwivedi.info/ecosystem.config.js \
+            # --only portfolio-frontend \
+            # --update-env
             echo "Frontend release $RELEASE_TAG is live."
           EOF
   # ── 3. Smoke test ─────────────────────────────────────────────────────────────
