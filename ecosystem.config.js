@@ -199,6 +199,16 @@ module.exports = {
     // ── Frontend (Next.js) ──────────────────────────────────────────────────
     {
       name: "portfolio-frontend",
+      
+      
+      // cwd: "/var/www/portfolio/frontend-current",
+      // script: "node_modules/.bin/next",
+      // args: "start",
+      // env_production: {
+      //   NODE_ENV: "production",
+      //   PORT: 3000
+      // }
+
 
       script: path.join(FRONTEND_DIR, "node_modules", ".bin", "next"),
       args:   "start",
