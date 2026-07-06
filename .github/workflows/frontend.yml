@@ -188,8 +188,7 @@ jobs:
             Frontend/package.json
             Frontend/package-lock.json
             Frontend/next.config.js
-            ecosystem.config.js
-            
+            # ecosystem.config.js 
           retention-days: 1
 
   # ── 2. Deploy ─────────────────────────────────────────────────────────────────
