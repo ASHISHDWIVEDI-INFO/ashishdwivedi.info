@@ -197,51 +197,68 @@ module.exports = {
     },
 
     // ── Frontend (Next.js) ──────────────────────────────────────────────────
+    // {
+    //   name: "portfolio-frontend",
+      
+      
+    //   // cwd: "/var/www/portfolio/frontend-current",
+    //   // script: "node_modules/.bin/next",
+    //   // args: "start",
+    //   // env_production: {
+    //   //   NODE_ENV: "production",
+    //   //   PORT: 3000
+    //   // }
+
+    //   script: path.join(FRONTEND_DIR, "node_modules", ".bin", "next"),
+    //   args:   "start",
+    //   cwd:    FRONTEND_DIR,
+
+    //   instances: 1,
+    //   exec_mode: "fork",   // Next.js manages its own internal clustering
+
+    //   autorestart:   true,
+    //   max_restarts:  5,
+    //   restart_delay: 5000,
+    //   min_uptime:    "10s",
+    //   max_memory_restart: "512M",
+
+    //   out_file:        path.join(FRONTEND_DIR, "logs", "out.log"),
+    //   error_file:      path.join(FRONTEND_DIR, "logs", "error.log"),
+    //   merge_logs:      true,
+    //   log_date_format: "YYYY-MM-DD HH:mm:ss Z",
+
+    //   env: {
+    //     NODE_ENV: "development",
+    //     PORT:     "3000",
+    //   },
+
+    //   env_production: {
+    //     NODE_ENV: "production",
+    //     PORT:     "3000",
+    //     // NEXT_PUBLIC_* vars are baked into the build at compile time (fix #12).
+    //     // They do not need to be set here at runtime.
+    //   },
+
+    //   watch: false,
+    // },
     {
       name: "portfolio-frontend",
-      
-      
+
       cwd: "/var/www/portfolio/frontend-current",
-      script: "node_modules/.bin/next",
-      args: "start",
+
+      script: "./node_modules/.bin/next",
+
+      args: "start -p 3000",
+
+      exec_mode: "fork",
+      
+      instances: 1,
+      
       env_production: {
         NODE_ENV: "production",
         PORT: 3000
       }
-
-
-      // script: path.join(FRONTEND_DIR, "node_modules", ".bin", "next"),
-      // args:   "start",
-      // cwd:    FRONTEND_DIR,
-
-      instances: 1,
-      exec_mode: "fork",   // Next.js manages its own internal clustering
-
-      autorestart:   true,
-      max_restarts:  5,
-      restart_delay: 5000,
-      min_uptime:    "10s",
-      max_memory_restart: "512M",
-
-      out_file:        path.join(FRONTEND_DIR, "logs", "out.log"),
-      error_file:      path.join(FRONTEND_DIR, "logs", "error.log"),
-      merge_logs:      true,
-      log_date_format: "YYYY-MM-DD HH:mm:ss Z",
-
-      env: {
-        NODE_ENV: "development",
-        PORT:     "3000",
-      },
-
-      // env_production: {
-      //   NODE_ENV: "production",
-      //   PORT:     "3000",
-      //   // NEXT_PUBLIC_* vars are baked into the build at compile time (fix #12).
-      //   // They do not need to be set here at runtime.
-      // },
-
-      watch: false,
-    },
+    }
 
   ],
 };
