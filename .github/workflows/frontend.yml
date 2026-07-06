@@ -280,6 +280,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH
+        run: |
+          echo "=== Loaded keys ==="
+          ssh-add -l
+          
+          echo "=== Test SSH ==="
+          ssh -vvv -o StrictHostKeyChecking=no \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} exit
+
       - name: Add host to known_hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
